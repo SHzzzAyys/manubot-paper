@@ -7,6 +7,17 @@
 2. 猫弓形虫疫苗证据库工程
 3. 自动化科研写作工具链工程
 
+另外，仓库现在还包含一套可直接服务毕业论文写作的资产库：
+
+- `docs/thesis/00-index.md`
+- `docs/thesis/01-chapter-background-significance.md`
+- `docs/thesis/02-chapter-review-status.md`
+- `docs/thesis/03-chapter-gaps-objectives.md`
+- `docs/thesis/04-paragraph-bank.md`
+- `docs/thesis/05-figure-table-bank.md`
+- `docs/thesis/06-gap-matrix.md`
+- `docs/thesis/07-defense-and-review-qa.md`
+
 ## 仓库入口
 
 - `content/`

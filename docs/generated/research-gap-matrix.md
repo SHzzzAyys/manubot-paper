@@ -1,0 +1,11 @@
+# Research Gap Matrix
+
+| gap_id | gap_title | current_evidence | main_limitation | thesis_opportunity |
+| --- | --- | --- | --- | --- |
+| G01 | 评价体系不统一 | studies differ in cat number, strain, challenge design, sampling window, and oocyst counting | horizontal comparison is weak | standardized challenge and endpoint framework |
+| G02 | 保护性免疫机制不清 | antibody and cytokine data often do not map cleanly to oocyst outcomes | mechanistic explanation remains incomplete | intestinal mucosal and enteroepithelial-stage immunity |
+| G03 | 长期保护不足 | re-shedding protection wanes with time in follow-up studies | short-term efficacy may overestimate practical value | long-term follow-up and booster strategy studies |
+| G04 | 异源保护不足 | heterologous reinfection more readily induces renewed shedding | broad protection remains uncertain | multi-genotype challenge evaluation |
+| G05 | 亚单位路线保护有限 | protein and DNA platforms often show partial protection only | effect size and consistency remain limited | multi-antigen and adjuvant optimization |
+| G06 | 减毒株转化障碍大 | attenuated strains can show strong efficacy but face safety and regulatory issues | productization risk is high | safety and controllability optimization |
+| G07 | 证据碎片化 | small sample sizes and heterogeneous design fragment the literature | hard to build a unified narrative | evidence grading and structured evidence database |

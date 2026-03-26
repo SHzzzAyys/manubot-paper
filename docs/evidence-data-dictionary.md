@@ -43,6 +43,19 @@
 - `key_value`
   该综述对当前项目的主要价值。
 
+## `cat_toxo_research_gap_matrix.csv`
+
+- `gap_id`
+  研究空白的稳定编号。
+- `gap_title`
+  空白点标题。
+- `current_evidence`
+  当前文献对该问题的支持现状。
+- `main_limitation`
+  当前证据的主要限制。
+- `thesis_opportunity`
+  对应可形成的毕业论文或后续课题切入点。
+
 ## 维护原则
 
 - 结构化证据库优先保留原始文献直接给出的量化结果。

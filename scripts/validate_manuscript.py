@@ -45,6 +45,7 @@ def validate_data_files() -> list[str]:
         "cat_toxo_vaccine_direct_studies.csv",
         "cat_toxo_vaccine_support_studies.csv",
         "cat_toxo_vaccine_reviews.csv",
+        "cat_toxo_research_gap_matrix.csv",
     ]:
         path = DATA / filename
         require(path)
