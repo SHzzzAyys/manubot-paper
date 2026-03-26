@@ -1,37 +1,88 @@
-# Manubot Paper Workspace
+# 猫弓形虫疫苗综述工作区
 
-This repository is a personalized Manubot starter workspace for drafting a scholarly manuscript with Git-based collaboration.
-It keeps the official Manubot build pipeline while replacing the template content with a cleaner default structure for real writing.
+本仓库基于 Manubot，用于撰写并维护综述《猫的弓形虫疫苗研究进展》。
+当前仓库已经不再只是一个空模板，而是同时承载 3 项工作：
 
-## What To Edit
+1. 综述投稿定稿工程
+2. 猫弓形虫疫苗证据库工程
+3. 自动化科研写作工具链工程
 
-- `content/metadata.yaml`: manuscript title, authors, affiliations, keywords
-- `content/01.abstract.md`: abstract
-- `content/02.introduction.md`: introduction and background
-- `content/03.methods.md`: methods
-- `content/04.results.md`: results
-- `content/05.discussion.md`: discussion and conclusion
-- `content/images/`: figures and diagrams
+## 仓库入口
 
-## Local Workflow
+- `content/`
+  Manubot 主文稿、主表、时间轴、研究矩阵和补充材料说明。
+- `data/`
+  结构化证据库 CSV 文件。
+- `scripts/`
+  证据表导出和轻量级校验脚本。
+- `docs/`
+  投稿清单、文稿结构地图、字段说明、工具链说明和生成表格。
 
-On this machine, the Manubot environment is already installed.
-Use the helper script at `C:\Users\zheng shang\use-manubot.ps1` to confirm the environment is available.
+## 主文稿结构
 
-For local manuscript builds on Windows, run the build steps from Git Bash:
+- `content/01.abstract.md`
+- `content/02.introduction.md`
+- `content/03.methods.md`
+- `content/04.results.md`
+- `content/05.discussion.md`
+- `content/08.conclusion.md`
 
-```bash
-bash build/build.sh
-manubot webpage
-cd webpage
-python -m http.server
+## 表格与补充材料
+
+- `content/06.core-table.md`
+  核心证据表。
+- `content/07.timeline.md`
+  研究演化时间轴。
+- `content/09.study-matrix.md`
+  逐篇研究矩阵。
+- `content/10.supplementary-notes.md`
+  补充材料说明、缩略词和数据口径。
+
+## 证据库文件
+
+- `data/cat_toxo_vaccine_direct_studies.csv`
+- `data/cat_toxo_vaccine_support_studies.csv`
+- `data/cat_toxo_vaccine_reviews.csv`
+
+字段解释见：
+
+- `docs/evidence-data-dictionary.md`
+
+## 常用文档
+
+- `docs/submission-checklist.md`
+  投稿前逐项检查。
+- `docs/manuscript-map.md`
+  当前主文、主表、补充材料的结构地图。
+- `docs/toolchain.md`
+  工具链说明。
+
+## 常用命令
+
+在本机可直接使用已配置好的 Python 与 Manubot 环境。
+
+导出结构化证据表：
+
+```powershell
+& "C:\Users\zheng shang\.venvs\manubot\Scripts\python.exe" scripts\export_evidence_tables.py
 ```
 
-## Collaboration Workflow
+运行轻量级校验：
 
-- Create a feature branch for each substantial change.
-- Open a pull request for section edits, figure updates, or citation-heavy revisions.
-- Let GitHub Actions validate the build before merging.
-- Keep one sentence per line in manuscript files to make diffs easier to review.
+```powershell
+& "C:\Users\zheng shang\.venvs\manubot\Scripts\python.exe" scripts\validate_manuscript.py
+```
 
-See `CONTRIBUTING.md` for the repository conventions used in this workspace.
+运行 Manubot 编排检查：
+
+```powershell
+$env:TZ='Etc/UTC'
+$env:LC_ALL='en_US.UTF-8'
+$env:PATH = "C:\Users\zheng shang\.venvs\manubot\Scripts;" + $env:PATH
+& "C:\Users\zheng shang\.venvs\manubot\Scripts\manubot.exe" process --content-directory=content --output-directory=output --cache-directory=ci/cache --skip-citations --log-level=INFO
+```
+
+## 当前已知待补项
+
+- `content/metadata.yaml` 中作者单位仍为占位符，正式投稿前需要补全。
+- HTML/PDF 最终导出仍受 `pandoc-fignos` 等依赖缺失影响，但不影响当前文稿内容与结构验证。
