@@ -18,6 +18,15 @@
 - `docs/thesis/06-gap-matrix.md`
 - `docs/thesis/07-defense-and-review-qa.md`
 
+以及三套更接近直接使用状态的重交付：
+
+- `docs/thesis-ready/`
+  接近可直接拼接进毕业论文的文献综述章节初稿。
+- `docs/proposal/`
+  开题报告资产包。
+- `docs/defense/`
+  答辩资产包。
+
 ## 仓库入口
 
 - `content/`
