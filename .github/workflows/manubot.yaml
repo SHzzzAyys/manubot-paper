@@ -34,6 +34,9 @@ on:
         type: boolean
         description: Use Docker to generate PDF
         default: true
+concurrency:
+  group: manubot-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   manubot:
     name: Manubot
