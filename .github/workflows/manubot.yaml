@@ -59,6 +59,16 @@ jobs:
         with:
           # fetch entire commit history to support get_rootstock_commit
           fetch-depth: 0
+      - name: Set Up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: ci/requirements-ci.txt
+      - name: Set Up Pandoc
+        uses: pandoc/actions/setup@v1
+        with:
+          version: '2.19.2'
       - name: Set Environment Variables (Workflow Dispatch)
         if: github.event_name == 'workflow_dispatch'
         run: |
@@ -84,11 +94,13 @@ jobs:
           restore-keys: |
             ci-cache-${{ env.DEFAULT_BRANCH_REF }}
       - name: Install Environment
-        uses: conda-incubator/setup-miniconda@v3
-        with:
-          activate-environment: manubot
-          environment-file: build/environment.yml
-          conda-remove-defaults: true
+        run: |
+          python -m venv .venv
+          echo "$GITHUB_WORKSPACE/.venv/bin" >> "$GITHUB_PATH"
+          echo "VIRTUAL_ENV=$GITHUB_WORKSPACE/.venv" >> "$GITHUB_ENV"
+          . .venv/bin/activate
+          python -m pip install --upgrade pip setuptools wheel
+          python -m pip install -r ci/requirements-ci.txt
       - name: Install Spellcheck
         if: env.SPELLCHECK == 'true'
         run: bash ci/install-spellcheck.sh
