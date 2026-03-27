@@ -294,12 +294,12 @@ When there are no longer any unstaged changes, then do `git commit`.
 If updating your default branch (i.e. `main` or `master`) via a pull request, proceed to push the commit to GitHub and open a pull request.
 Once the pull request is ready to merge, use GitHub's "Create a merge commit" option rather than "Squash and merge" or "Rebase and merge" to preserve the rootstock commit hashes.
 
-The environment for local builds does not automatically update when [`build/environment.yml`](build/environment.yml) changes.
-To update your local conda `manubot` environment with new changes, run:
+The environment for local builds does not automatically update when [`requirements-local.txt`](requirements-local.txt) or [`ci/requirements-ci.txt`](ci/requirements-ci.txt) changes.
+To update your local `.venv` with new changes, run:
 
 ```shell
-# update a local conda environment
-conda env update --file build/environment.yml
+# update the local virtual environment
+python -m pip install -r requirements-local.txt
 ```
 
 ## Default branch

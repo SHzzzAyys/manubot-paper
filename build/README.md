@@ -31,40 +31,38 @@ To change the options, either edit the YAML files directly or add additional `--
 
 Note: currently, **Windows is not supported**.
 
-The Manubot environment is managed with [conda](https://conda.io).
-If you do not have `conda` installed, we recommend using the Miniforge3 installer from [miniforge](https://github.com/conda-forge/miniforge) (includes `conda` and `mamba`).
-Install the environment from [`environment.yml`](environment.yml) by running one of following commands
-(from the repository's root directory):
+The recommended local environment now uses a repository-local Python virtual environment in `.venv`.
+From the repository root, run one of the following setup helpers:
 
 ```sh
-# Install the environment using conda
-conda env create --file build/environment.yml
+# Linux / macOS
+bash scripts/setup_local_env.sh
 
-# Install the environment using mamba (faster)
-mamba env create --file build/environment.yml
+# Windows PowerShell
+powershell -ExecutionPolicy Bypass -File scripts/setup_local_env.ps1
 ```
 
-If the `manubot` environment is already installed, but needs to be updated to reflect changes to `environment.yml`, use one of the following options:
+Or create the environment manually:
 
-```shell
-# option 1: update the existing environment.
-conda env update --file build/environment.yml
-
-# option 2: remove and reinstall the manubot environment.
-# Slower than option 1, but guarantees a fresh environment.
-conda env remove --name manubot
-conda env create --file build/environment.yml
-
-# option 3: reinstall the manubot environment faster using mamba.
-mamba env create --force --file build/environment.yml
+```sh
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip setuptools wheel
+python -m pip install -r requirements-local.txt
 ```
 
-Activate with `conda activate manubot` (assumes `conda` version of [at least](https://github.com/conda/conda/blob/9d759d8edeb86569c25f6eb82053f09581013a2a/CHANGELOG.md#440-2017-12-20) 4.4).
-The environment should successfully install on both Linux and macOS.
-However, it will fail on Windows due to the [`pango`](https://anaconda.org/conda-forge/pango) dependency.
+To refresh an existing local `.venv`, reactivate it and rerun:
+
+```sh
+python -m pip install --upgrade pip setuptools wheel
+python -m pip install -r requirements-local.txt
+```
+
+The CI workflow uses the same `pip` dependency set via `ci/requirements-ci.txt`, so local and CI installs are now aligned.
+[`environment.yml`](environment.yml) is retained only as a historical reference from the original rootstock setup.
 
 Because the build process is dependent on having the appropriate version of the `manubot` Python package,
-it is necessary to use the version specified in `environment.yml`.
+it is necessary to use the pinned version from `requirements-local.txt` / `ci/requirements-ci.txt`.
 The latest `manubot` release on PyPI may not be compatible with the latest version of this rootstock repository.
 
 ## Building PDFs

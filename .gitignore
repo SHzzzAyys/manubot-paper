@@ -17,6 +17,7 @@ build/pandoc/filters/spellcheck.lua
 # Python
 __pycache__/
 *.pyc
+.venv/
 
 # Jupyter Notebook
 .ipynb_checkpoints
