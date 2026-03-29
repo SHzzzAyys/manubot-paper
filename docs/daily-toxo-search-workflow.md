@@ -31,12 +31,12 @@ powershell -ExecutionPolicy Bypass -File "C:\Users\zheng shang\manubot-paper\scr
 
 - 查询最近 `7` 天的 PubMed 新记录
 - 生成一份当日 Markdown 报告
-- 输出到 `docs/daily-search/`
+- 输出到 `D:\ToxoVault\ResearchProject\outputs\daily-search\`
 
 输出示例路径：
 
 ```text
-C:\Users\zheng shang\manubot-paper\docs\daily-search\2026-03-29-toxo-vaccine-search.md
+D:\ToxoVault\ResearchProject\outputs\daily-search\2026-03-29-toxo-vaccine-search.md
 ```
 
 如果你只想查最近 `1` 天：

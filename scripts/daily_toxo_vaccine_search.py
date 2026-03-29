@@ -16,7 +16,7 @@ from pathlib import Path
 
 
 REPO = Path(__file__).resolve().parent.parent
-OUTPUT_DIR = REPO / "docs" / "daily-search"
+OUTPUT_DIR = Path(r"D:\ToxoVault\ResearchProject\outputs\daily-search")
 
 NCBI = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils"
 
