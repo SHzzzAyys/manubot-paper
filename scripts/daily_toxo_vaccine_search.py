@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Fetch recent Toxoplasma vaccine papers from PubMed and write a daily report."""
+"""Fetch recent Toxoplasma literature from PubMed and write a layered daily report."""
 
 from __future__ import annotations
 
@@ -15,29 +15,47 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 
 
-REPO = Path(__file__).resolve().parent.parent
 OUTPUT_DIR = Path(r"D:\ToxoVault\ResearchProject\outputs\daily-search")
-
 NCBI = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils"
 
 QUERIES = [
     (
         "core_vaccine",
+        "核心疫苗",
         '("Toxoplasma gondii"[Title/Abstract] OR toxoplasma[Title/Abstract]) '
         'AND (vaccine*[Title/Abstract] OR vaccination[Title/Abstract] OR immuniz*[Title/Abstract])',
     ),
     (
-        "feline_oocyst",
+        "cat_oocyst",
+        "猫与卵囊",
         '("Toxoplasma gondii"[Title/Abstract] OR toxoplasma[Title/Abstract]) '
         'AND (cat[Title/Abstract] OR cats[Title/Abstract] OR feline[Title/Abstract] '
-        'OR oocyst*[Title/Abstract] OR "definitive host"[Title/Abstract]) '
-        'AND (vaccine*[Title/Abstract] OR immuniz*[Title/Abstract] OR attenuated[Title/Abstract])',
+        'OR oocyst*[Title/Abstract] OR "definitive host"[Title/Abstract] '
+        'OR "sexual stage"[Title/Abstract])',
     ),
     (
-        "platforms",
+        "attenuation_platforms",
+        "平台与减毒",
         '("Toxoplasma gondii"[Title/Abstract] OR toxoplasma[Title/Abstract]) '
-        'AND ("DNA vaccine"[Title/Abstract] OR "subunit vaccine"[Title/Abstract] '
-        'OR "live attenuated"[Title/Abstract] OR mRNA[Title/Abstract] OR recombinant[Title/Abstract])',
+        'AND (attenuated[Title/Abstract] OR "live attenuated"[Title/Abstract] '
+        'OR recombinant[Title/Abstract] OR "DNA vaccine"[Title/Abstract] '
+        'OR "subunit vaccine"[Title/Abstract] OR adjuvant[Title/Abstract] '
+        'OR mucosal[Title/Abstract])',
+    ),
+    (
+        "stage_conversion",
+        "阶段转换",
+        '("Toxoplasma gondii"[Title/Abstract] OR toxoplasma[Title/Abstract]) '
+        'AND (bradyzoite*[Title/Abstract] OR tachyzoite*[Title/Abstract] '
+        'OR cyst*[Title/Abstract] OR differentiation[Title/Abstract] '
+        'OR conversion[Title/Abstract])',
+    ),
+    (
+        "apicoplast_targets",
+        "顶质体与靶点",
+        '("Toxoplasma gondii"[Title/Abstract] OR toxoplasma[Title/Abstract]) '
+        'AND (apicoplast[Title/Abstract] OR thioredoxin[Title/Abstract] '
+        'OR kinase[Title/Abstract] OR target*[Title/Abstract] OR drug*[Title/Abstract])',
     ),
 ]
 
@@ -75,8 +93,8 @@ def clean_whitespace(text: str) -> str:
     return re.sub(r"\s+", " ", text).strip()
 
 
-def first_article_id(pubmed_data: ET.Element) -> str:
-    for article_id in pubmed_data.findall(".//PubmedData/ArticleIdList/ArticleId"):
+def first_article_id(article: ET.Element) -> str:
+    for article_id in article.findall(".//PubmedData/ArticleIdList/ArticleId"):
         if article_id.attrib.get("IdType") == "doi":
             return article_id.text or ""
     return ""
@@ -94,12 +112,12 @@ def extract_abstract(article: ET.Element) -> str:
 
 
 def extract_pub_date(article: ET.Element) -> str:
-    article_date = article.find(".//PubDate")
-    if article_date is None:
+    pub_date = article.find(".//PubDate")
+    if pub_date is None:
         return ""
-    year = article_date.findtext("Year", default="")
-    month = article_date.findtext("Month", default="")
-    day = article_date.findtext("Day", default="")
+    year = pub_date.findtext("Year", default="")
+    month = pub_date.findtext("Month", default="")
+    day = pub_date.findtext("Day", default="")
     return "-".join(part for part in [year, month, day] if part)
 
 
@@ -136,20 +154,17 @@ def efetch(pmids: list[str]) -> list[dict[str, str]]:
             pmid = citation.findtext("PMID", default="")
             title = clean_whitespace("".join(article_data.findtext("ArticleTitle", default="")))
             journal = clean_whitespace(article_data.findtext(".//Journal/Title", default=""))
-            abstract = extract_abstract(article)
-            pub_date = extract_pub_date(article)
-            doi = first_article_id(article)
-            authors = extract_authors(article)
             records.append(
                 {
                     "pmid": pmid,
                     "title": title,
                     "journal": journal,
-                    "date": pub_date,
-                    "doi": doi,
-                    "authors": authors,
-                    "abstract": abstract,
+                    "date": extract_pub_date(article),
+                    "doi": first_article_id(article),
+                    "authors": extract_authors(article),
+                    "abstract": extract_abstract(article),
                     "pubmed_url": f"https://pubmed.ncbi.nlm.nih.gov/{pmid}/" if pmid else "",
+                    "matched_queries": [],
                 }
             )
     return records
@@ -157,11 +172,12 @@ def efetch(pmids: list[str]) -> list[dict[str, str]]:
 
 def score_priority(record: dict[str, str]) -> str:
     text = " ".join([record.get("title", ""), record.get("abstract", "")]).lower()
-    high_terms = ["cat", "cats", "feline", "oocyst", "definitive host", "transmission-blocking"]
-    medium_terms = ["vaccine", "vaccination", "attenuated", "subunit", "dna vaccine", "recombinant"]
-    if any(term in text for term in high_terms) and any(term in text for term in medium_terms):
+    high_terms = ["cat", "cats", "feline", "oocyst", "definitive host", "sexual stage", "hap2"]
+    core_terms = ["vaccine", "vaccination", "immuniz", "attenuated", "dna vaccine", "subunit"]
+    support_terms = ["bradyzoite", "cyst", "differentiation", "conversion", "apicoplast", "thioredoxin", "kinase"]
+    if any(term in text for term in high_terms) and any(term in text for term in core_terms):
         return "high"
-    if any(term in text for term in medium_terms):
+    if any(term in text for term in core_terms) or any(term in text for term in support_terms):
         return "medium"
     return "background"
 
@@ -170,20 +186,21 @@ def score_reason(priority: str) -> str:
     if priority == "high":
         return "直接涉及猫模型、卵囊排出或关键结局，优先处理。"
     if priority == "medium":
-        return "与弓形虫疫苗平台或候选抗原直接相关，可纳入后备清单。"
+        return "与弓形虫疫苗平台、阶段变化或支撑性机制直接相关，可纳入后备清单。"
     return "与弓形虫相关，但更偏背景、方法或外围支持信息。"
 
 
 def format_record(record: dict[str, str]) -> str:
-    abstract = record.get("abstract", "")
-    abstract = textwrap.shorten(abstract, width=280, placeholder="...")
+    abstract = textwrap.shorten(record.get("abstract", ""), width=280, placeholder="...")
     doi = record.get("doi", "")
+    matched = ", ".join(record.get("matched_queries", [])) or "未标记"
     doi_line = f"- DOI: `{doi}`" if doi else "- DOI: 未检出"
     return "\n".join(
         [
             f"### {record['title']}",
             f"- 优先级：`{record['priority']}`",
             f"- 原因：{record['reason']}",
+            f"- 命中分组：{matched}",
             f"- 期刊：{record['journal'] or '未检出'}",
             f"- 日期：{record['date'] or '未检出'}",
             f"- 作者：{record['authors'] or '未检出'}",
@@ -199,17 +216,18 @@ def format_record(record: dict[str, str]) -> str:
 def build_report(records: list[dict[str, str]], days: int) -> str:
     today = dt.date.today().isoformat()
     lines = [
-        f"# 弓形虫疫苗每日检索报告 {today}",
+        f"# 弓形虫每日检索报告 {today}",
         "",
         f"- 检索窗口：最近 `{days}` 天",
         "- 数据源：PubMed",
+        "- 结构：核心检索 + 外围补充检索",
         "- 说明：这是自动初筛结果，后续可再人工筛选并生成文献笔记。",
         "",
-        "## 检索式",
+        "## 检索分组",
         "",
     ]
-    for name, query in QUERIES:
-        lines.append(f"- `{name}`: `{query}`")
+    for key, label, query in QUERIES:
+        lines.append(f"- `{key}` / {label}: `{query}`")
     lines.extend(["", f"## 命中记录（共 {len(records)} 篇）", ""])
     if not records:
         lines.append("本次没有检索到新记录。")
@@ -231,26 +249,36 @@ def build_report(records: list[dict[str, str]], days: int) -> str:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Generate a daily Toxoplasma vaccine report from PubMed.")
+    parser = argparse.ArgumentParser(description="Generate a daily Toxoplasma literature report from PubMed.")
     parser.add_argument("--days", type=int, default=7, help="Search window in days.")
     args = parser.parse_args()
 
-    pmids: list[str] = []
-    for _, query in QUERIES:
-        for pmid in esearch(query, args.days):
-            if pmid not in pmids:
-                pmids.append(pmid)
+    query_hits: dict[str, list[str]] = {}
+    all_pmids: list[str] = []
+    for key, label, query in QUERIES:
+        ids = esearch(query, args.days)
+        query_hits[key] = ids
+        for pmid in ids:
+            if pmid not in all_pmids:
+                all_pmids.append(pmid)
 
-    records = efetch(pmids)
+    records = efetch(all_pmids)
+    by_pmid = {record["pmid"]: record for record in records}
+    for key, label, _ in QUERIES:
+        for pmid in query_hits.get(key, []):
+            if pmid in by_pmid:
+                by_pmid[pmid]["matched_queries"].append(label)
+
     for record in records:
         record["priority"] = score_priority(record)
         record["reason"] = score_reason(record["priority"])
-    records.sort(key=lambda item: ({"high": 0, "medium": 1, "background": 2}[item["priority"]], item["date"]), reverse=False)
+
+    priority_order = {"high": 0, "medium": 1, "background": 2}
+    records.sort(key=lambda item: (priority_order[item["priority"]], item["date"] or ""), reverse=False)
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     outfile = OUTPUT_DIR / f"{dt.date.today().isoformat()}-toxo-vaccine-search.md"
     outfile.write_text(build_report(records, args.days), encoding="utf-8")
-
     print(f"Wrote {outfile}")
     return 0
 
