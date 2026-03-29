@@ -9,10 +9,11 @@ $sanitizeScript = Join-Path $PSScriptRoot "sanitize_wording.py"
 function Invoke-PythonScript {
     param(
         [string]$PythonExe,
-        [string]$ScriptPath
+        [string]$ScriptPath,
+        [string[]]$Arguments = @()
     )
 
-    & $PythonExe $ScriptPath
+    & $PythonExe $ScriptPath @Arguments
     if ($LASTEXITCODE -ne 0) {
         exit $LASTEXITCODE
     }
@@ -21,11 +22,11 @@ function Invoke-PythonScript {
 if (Test-Path $venvPython) {
     Invoke-PythonScript -PythonExe $venvPython -ScriptPath $intelScript
     Invoke-PythonScript -PythonExe $venvPython -ScriptPath $hubScript
-    Invoke-PythonScript -PythonExe $venvPython -ScriptPath $sanitizeScript
+    Invoke-PythonScript -PythonExe $venvPython -ScriptPath $sanitizeScript -Arguments @("--profile", "academic")
     exit 0
 }
 
 Invoke-PythonScript -PythonExe "py" -ScriptPath $intelScript
 Invoke-PythonScript -PythonExe "py" -ScriptPath $hubScript
-Invoke-PythonScript -PythonExe "py" -ScriptPath $sanitizeScript
+Invoke-PythonScript -PythonExe "py" -ScriptPath $sanitizeScript -Arguments @("--profile", "academic")
 exit 0

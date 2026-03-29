@@ -26,12 +26,12 @@ if (Test-Path $venvPython) {
     Invoke-PythonScript -PythonExe $venvPython -ScriptPath $searchScript -Arguments @("--days", $Days)
     Invoke-PythonScript -PythonExe $venvPython -ScriptPath $intelScript
     Invoke-PythonScript -PythonExe $venvPython -ScriptPath $hubScript
-    Invoke-PythonScript -PythonExe $venvPython -ScriptPath $sanitizeScript
+    Invoke-PythonScript -PythonExe $venvPython -ScriptPath $sanitizeScript -Arguments @("--profile", "academic")
     exit 0
 }
 
 Invoke-PythonScript -PythonExe "py" -ScriptPath $searchScript -Arguments @("--days", $Days)
 Invoke-PythonScript -PythonExe "py" -ScriptPath $intelScript
 Invoke-PythonScript -PythonExe "py" -ScriptPath $hubScript
-Invoke-PythonScript -PythonExe "py" -ScriptPath $sanitizeScript
+Invoke-PythonScript -PythonExe "py" -ScriptPath $sanitizeScript -Arguments @("--profile", "academic")
 exit 0

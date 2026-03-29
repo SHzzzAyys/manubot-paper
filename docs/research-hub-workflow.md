@@ -58,10 +58,16 @@ D:\ToxoVault\ResearchProject\outputs\research-hub\
 
 ## 自动替换器
 
-词汇替换规则放在：
+论文版词汇替换规则放在：
 
 ```text
-C:\Users\zheng shang\manubot-paper\data\wording_substitutions.json
+C:\Users\zheng shang\manubot-paper\data\wording-profiles\academic.json
+```
+
+日常版词汇替换规则放在：
+
+```text
+C:\Users\zheng shang\manubot-paper\data\wording-profiles\daily.json
 ```
 
 清洗脚本：
@@ -80,16 +86,22 @@ C:\Users\zheng shang\manubot-paper\scripts\sanitize_wording.py
 - `D:\ToxoVault\ResearchProject\outputs\daily-search\`
 - `D:\ToxoVault\ResearchProject\outputs\research-hub\`
 
-如果你只想单独跑一次替换：
+如果你只想单独跑一次论文版替换：
 
 ```powershell
-& "C:\Users\zheng shang\manubot-paper\.venv\Scripts\python.exe" "C:\Users\zheng shang\manubot-paper\scripts\sanitize_wording.py"
+& "C:\Users\zheng shang\manubot-paper\.venv\Scripts\python.exe" "C:\Users\zheng shang\manubot-paper\scripts\sanitize_wording.py" --profile academic
+```
+
+如果你只想单独跑一次日常版替换：
+
+```powershell
+& "C:\Users\zheng shang\manubot-paper\.venv\Scripts\python.exe" "C:\Users\zheng shang\manubot-paper\scripts\sanitize_wording.py" --profile daily
 ```
 
 如果只想先看会替换哪些内容：
 
 ```powershell
-& "C:\Users\zheng shang\manubot-paper\.venv\Scripts\python.exe" "C:\Users\zheng shang\manubot-paper\scripts\sanitize_wording.py" --dry-run
+& "C:\Users\zheng shang\manubot-paper\.venv\Scripts\python.exe" "C:\Users\zheng shang\manubot-paper\scripts\sanitize_wording.py" --profile academic --dry-run
 ```
 
 ## 推荐使用方式

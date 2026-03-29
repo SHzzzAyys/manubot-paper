@@ -48,8 +48,8 @@
     ],
     "priority": "medium",
     "note_date": "2026-03-29",
-    "main_status": "待筛选",
-    "next_action": "保留在外围资料层，视需要再提升"
+    "main_status": "已进入主库",
+    "next_action": "建议核对正文和数据层是否一致"
   },
   {
     "path": "daily-writing/2026-03-29 文献笔记 gra1-bag1 RT-qPCR assay for Toxoplasma viability.md",
