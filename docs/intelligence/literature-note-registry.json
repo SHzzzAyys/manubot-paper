@@ -1,0 +1,70 @@
+[
+  {
+    "path": "daily-writing/2026-03-28 文献笔记 BKI-1708 induces cytokinesis defects and stage conversion in Toxoplasma.md",
+    "title": "BKI-1708 induces cytokinesis defects and stage conversion in *Toxoplasma gondii*",
+    "journal": "International Journal for Parasitology: Drugs and Drug Resistance",
+    "year": "2025",
+    "doi": "",
+    "pmid": "38917582",
+    "summary": "这篇研究提示：**`BKI-1708` 在弓形虫中的作用并不只是抑制增殖，它还会干扰胞质分裂并诱导缓殖子相关转换，因此其药物效应需要结合“分裂异常 + 阶段分化”一起理解。**",
+    "topics": [
+      "阶段转换与包囊",
+      "顶质体与靶点"
+    ],
+    "priority": "medium",
+    "note_date": "2026-03-28",
+    "main_status": "待筛选",
+    "next_action": "保留在外围资料层，视需要再提升"
+  },
+  {
+    "path": "daily-writing/2026-03-28 文献笔记 Two essential Thioredoxins in Toxoplasma gondii.md",
+    "title": "Two essential Thioredoxins mediate apicoplast biogenesis, protein import, and gene expression in *Toxoplasma gondii*",
+    "journal": "PLoS Pathogens",
+    "year": "2018-02-22",
+    "doi": "10.1371/journal.ppat.1006836",
+    "pmid": "29470517",
+    "summary": "这篇文章表明：**弓形虫顶质体中的两种必需硫氧还蛋白分别参与蛋白导入和基因表达调控，提示顶质体功能维持高度依赖氧化还原调节机制。**",
+    "topics": [
+      "检测与方法",
+      "顶质体与靶点"
+    ],
+    "priority": "medium",
+    "note_date": "2026-03-28",
+    "main_status": "待筛选",
+    "next_action": "保留在外围资料层，视需要再提升"
+  },
+  {
+    "path": "daily-writing/2026-03-29 文献笔记 MIC17A as a marker for feline toxoplasmosis.md",
+    "title": "MIC17A 作为猫弓形虫检测标志物的潜力",
+    "journal": "Current Microbiology",
+    "year": "2026",
+    "doi": "10.1007/s00284-026-04823-3",
+    "pmid": "41874672",
+    "summary": "这篇文章提示：**`MIC17A` 可能同时具有肠上皮阶段和慢性阶段标志物价值，因此可作为猫弓形虫检测研究中的一个值得关注的候选分子。**",
+    "topics": [
+      "猫模型与卵囊",
+      "阶段转换与包囊",
+      "检测与方法"
+    ],
+    "priority": "medium",
+    "note_date": "2026-03-29",
+    "main_status": "待筛选",
+    "next_action": "保留在外围资料层，视需要再提升"
+  },
+  {
+    "path": "daily-writing/2026-03-29 文献笔记 gra1-bag1 RT-qPCR assay for Toxoplasma viability.md",
+    "title": "gra1-bag1 RT-qPCR 用于评估弓形虫活性",
+    "journal": "Scientific Reports",
+    "year": "2026-03-21",
+    "doi": "10.1038/s41598-026-43786-0",
+    "pmid": "41865077",
+    "summary": "这篇文章表明：**`gra1-bag1 RT-qPCR` 有望作为替代小鼠生物测定的分子方法，用于判断弓形虫是否仍具有活性。**",
+    "topics": [
+      "检测与方法"
+    ],
+    "priority": "medium",
+    "note_date": "2026-03-29",
+    "main_status": "待筛选",
+    "next_action": "保留在外围资料层，视需要再提升"
+  }
+]

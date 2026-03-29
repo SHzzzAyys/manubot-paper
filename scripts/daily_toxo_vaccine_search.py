@@ -27,7 +27,7 @@ QUERIES = [
     ),
     (
         "cat_oocyst",
-        "猫与卵囊",
+        "猫模型与卵囊",
         '("Toxoplasma gondii"[Title/Abstract] OR toxoplasma[Title/Abstract]) '
         'AND (cat[Title/Abstract] OR cats[Title/Abstract] OR feline[Title/Abstract] '
         'OR oocyst*[Title/Abstract] OR "definitive host"[Title/Abstract] '
@@ -35,7 +35,7 @@ QUERIES = [
     ),
     (
         "attenuation_platforms",
-        "平台与减毒",
+        "减毒与平台",
         '("Toxoplasma gondii"[Title/Abstract] OR toxoplasma[Title/Abstract]) '
         'AND (attenuated[Title/Abstract] OR "live attenuated"[Title/Abstract] '
         'OR recombinant[Title/Abstract] OR "DNA vaccine"[Title/Abstract] '
@@ -44,7 +44,7 @@ QUERIES = [
     ),
     (
         "stage_conversion",
-        "阶段转换",
+        "阶段转换与包囊",
         '("Toxoplasma gondii"[Title/Abstract] OR toxoplasma[Title/Abstract]) '
         'AND (bradyzoite*[Title/Abstract] OR tachyzoite*[Title/Abstract] '
         'OR cyst*[Title/Abstract] OR differentiation[Title/Abstract] '
@@ -93,9 +93,9 @@ def clean_whitespace(text: str) -> str:
     return re.sub(r"\s+", " ", text).strip()
 
 
-def first_article_id(article: ET.Element) -> str:
+def first_article_id(article: ET.Element, id_type: str) -> str:
     for article_id in article.findall(".//PubmedData/ArticleIdList/ArticleId"):
-        if article_id.attrib.get("IdType") == "doi":
+        if article_id.attrib.get("IdType") == id_type:
             return article_id.text or ""
     return ""
 
@@ -139,11 +139,7 @@ def extract_authors(article: ET.Element) -> str:
 def efetch(pmids: list[str]) -> list[dict[str, str]]:
     records: list[dict[str, str]] = []
     for batch in chunked(pmids, 20):
-        params = {
-            "db": "pubmed",
-            "retmode": "xml",
-            "id": ",".join(batch),
-        }
+        params = {"db": "pubmed", "retmode": "xml", "id": ",".join(batch)}
         url = f"{NCBI}/efetch.fcgi?{urllib.parse.urlencode(params)}"
         root = ET.fromstring(fetch_text(url))
         for article in root.findall(".//PubmedArticle"):
@@ -160,7 +156,8 @@ def efetch(pmids: list[str]) -> list[dict[str, str]]:
                     "title": title,
                     "journal": journal,
                     "date": extract_pub_date(article),
-                    "doi": first_article_id(article),
+                    "doi": first_article_id(article, "doi"),
+                    "pmc": first_article_id(article, "pmc"),
                     "authors": extract_authors(article),
                     "abstract": extract_abstract(article),
                     "pubmed_url": f"https://pubmed.ncbi.nlm.nih.gov/{pmid}/" if pmid else "",
@@ -172,29 +169,41 @@ def efetch(pmids: list[str]) -> list[dict[str, str]]:
 
 def score_priority(record: dict[str, str]) -> str:
     text = " ".join([record.get("title", ""), record.get("abstract", "")]).lower()
-    high_terms = ["cat", "cats", "feline", "oocyst", "definitive host", "sexual stage", "hap2"]
-    core_terms = ["vaccine", "vaccination", "immuniz", "attenuated", "dna vaccine", "subunit"]
-    support_terms = ["bradyzoite", "cyst", "differentiation", "conversion", "apicoplast", "thioredoxin", "kinase"]
-    if any(term in text for term in high_terms) and any(term in text for term in core_terms):
+    cat_terms = ["cat", "cats", "feline", "oocyst", "definitive host", "sexual stage", "hap2"]
+    vaccine_terms = ["vaccine", "vaccination", "immuniz", "attenuated", "dna vaccine", "subunit", "adjuvant"]
+    support_terms = [
+        "bradyzoite",
+        "cyst",
+        "differentiation",
+        "conversion",
+        "apicoplast",
+        "thioredoxin",
+        "kinase",
+        "marker",
+        "viability",
+    ]
+    if any(term in text for term in cat_terms) and any(term in text for term in vaccine_terms):
         return "high"
-    if any(term in text for term in core_terms) or any(term in text for term in support_terms):
+    if any(term in text for term in vaccine_terms) or any(term in text for term in support_terms) or any(
+        term in text for term in cat_terms
+    ):
         return "medium"
     return "background"
 
 
 def score_reason(priority: str) -> str:
     if priority == "high":
-        return "直接涉及猫模型、卵囊排出或关键结局，优先处理。"
+        return "与猫模型、卵囊结局或直接免疫评价关系紧密，宜优先人工核对。"
     if priority == "medium":
-        return "与弓形虫疫苗平台、阶段变化或支撑性机制直接相关，可纳入后备清单。"
-    return "与弓形虫相关，但更偏背景、方法或外围支持信息。"
+        return "与阶段转换、检测方法、顶质体或支撑性机制相关，适合纳入外围跟踪。"
+    return "与弓形虫主题有关，但更偏背景信息，可按需保留。"
 
 
 def format_record(record: dict[str, str]) -> str:
-    abstract = textwrap.shorten(record.get("abstract", ""), width=280, placeholder="...")
-    doi = record.get("doi", "")
-    matched = ", ".join(record.get("matched_queries", [])) or "未标记"
-    doi_line = f"- DOI: `{doi}`" if doi else "- DOI: 未检出"
+    abstract = textwrap.shorten(record.get("abstract", ""), width=320, placeholder="...")
+    matched = "、".join(record.get("matched_queries", [])) or "未标记"
+    doi = record.get("doi") or "未检出"
+    pmc = record.get("pmc") or "未检出"
     return "\n".join(
         [
             f"### {record['title']}",
@@ -204,9 +213,10 @@ def format_record(record: dict[str, str]) -> str:
             f"- 期刊：{record['journal'] or '未检出'}",
             f"- 日期：{record['date'] or '未检出'}",
             f"- 作者：{record['authors'] or '未检出'}",
-            f"- PMID: `{record['pmid']}`",
-            doi_line,
-            f"- PubMed: {record['pubmed_url']}",
+            f"- PMID：`{record['pmid']}`",
+            f"- DOI：`{doi}`",
+            f"- PMCID：`{pmc}`",
+            f"- PubMed：{record['pubmed_url']}",
             f"- 摘要摘录：{abstract or '未检出'}",
             "",
         ]
@@ -221,14 +231,14 @@ def build_report(records: list[dict[str, str]], days: int) -> str:
         f"- 检索窗口：最近 `{days}` 天",
         "- 数据源：PubMed",
         "- 结构：核心检索 + 外围补充检索",
-        "- 说明：这是自动初筛结果，后续可再人工筛选并生成文献笔记。",
+        "- 说明：这是自动初筛结果，后续仍需人工判断是否值得做文献笔记或纳入主库。",
         "",
         "## 检索分组",
         "",
     ]
     for key, label, query in QUERIES:
-        lines.append(f"- `{key}` / {label}: `{query}`")
-    lines.extend(["", f"## 命中记录（共 {len(records)} 篇）", ""])
+        lines.append(f"- `{key}` / {label}：`{query}`")
+    lines.extend(["", f"## 命中文献（共 {len(records)} 篇）", ""])
     if not records:
         lines.append("本次没有检索到新记录。")
         lines.append("")
@@ -239,9 +249,9 @@ def build_report(records: list[dict[str, str]], days: int) -> str:
         [
             "## 建议后续动作",
             "",
-            "1. 优先处理 `high` 项，制作文献笔记并推送到 `writing-everyday/daily-writing`。",
-            "2. 对 `medium` 项判断是否进入主数据库或综述正文。",
-            "3. 对 `background` 项仅在需要补背景时保留。",
+            "1. 优先处理 `high` 条目，必要时直接生成文献笔记。",
+            "2. 对 `medium` 条目判断是否进入主数据库、正文或外围资料层。",
+            "3. `background` 条目仅在补背景或方法学时保留。",
             "",
         ]
     )
@@ -264,6 +274,8 @@ def main() -> int:
 
     records = efetch(all_pmids)
     by_pmid = {record["pmid"]: record for record in records}
+    for _, label, _ in QUERIES:
+        pass
     for key, label, _ in QUERIES:
         for pmid in query_hits.get(key, []):
             if pmid in by_pmid:
