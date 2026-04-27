@@ -1,0 +1,16 @@
+[project]
+name = "vibe-pomo"
+version = "0.1.0"
+description = "A gentle, minimal pomodoro companion in your terminal."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "typer>=0.12,<1.0",
+]
+
+[project.scripts]
+vibe-pomo = "main:app"
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
