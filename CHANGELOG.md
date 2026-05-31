@@ -10,6 +10,16 @@ workflow milestones.
 
 ## [Unreleased]
 
+### Changed
+- Documented the external contribution direction for Manubot writing workflows,
+  citation consistency, and reproducible manuscript validation.
+- Normalized requirements text files to match the repository line-ending policy.
+
+## [0.1.1] - 2026-05-31
+
+Maintenance release for open-source readiness, reproducibility documentation,
+and CI/citation hygiene.
+
 ### Added
 - CI build-status and license badges in the README.
 - `CITATION.cff` for GitHub citation metadata.
@@ -55,5 +65,6 @@ research-writing workflow.
   `data/`, and validation/export scripts under `scripts/`.
 - GitHub Actions and AppVeyor build configuration for the Manubot pipeline.
 
-[Unreleased]: https://github.com/SHzzzAyys/manubot-paper/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/SHzzzAyys/manubot-paper/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/SHzzzAyys/manubot-paper/releases/tag/v0.1.1
 [0.1.0]: https://github.com/SHzzzAyys/manubot-paper/releases/tag/v0.1.0

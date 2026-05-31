@@ -98,6 +98,8 @@ $env:PATH = ".\.venv\Scripts;" + $env:PATH
 
 The repository is actively maintained as a research-writing workflow. The current maintenance focus is evidence-table consistency, manuscript validation, CI build reliability, citation consistency, and clearer release/version-control practices for manuscript outputs.
 
+External contribution work focuses on Manubot writing workflows, citation consistency, and reproducible manuscript validation.
+
 ## License
 
 Repository content is licensed under Creative Commons Attribution 4.0 International (`CC-BY-4.0`) unless otherwise noted. See `LICENSE` and `LICENSE.md`.
