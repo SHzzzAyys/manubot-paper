@@ -24,8 +24,8 @@ header-includes: |
   <meta name="dc.date" content="2026-05-31" />
   <meta name="citation_publication_date" content="2026-05-31" />
   <meta property="article:published_time" content="2026-05-31" />
-  <meta name="dc.modified" content="2026-05-31T03:54:04+00:00" />
-  <meta property="article:modified_time" content="2026-05-31T03:54:04+00:00" />
+  <meta name="dc.modified" content="2026-05-31T04:07:38+00:00" />
+  <meta property="article:modified_time" content="2026-05-31T04:07:38+00:00" />
   <meta name="dc.language" content="zh-CN" />
   <meta name="citation_language" content="zh-CN" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -41,9 +41,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://SHzzzAyys.github.io/manubot-paper/" />
   <meta name="citation_pdf_url" content="https://SHzzzAyys.github.io/manubot-paper/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://SHzzzAyys.github.io/manubot-paper/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://SHzzzAyys.github.io/manubot-paper/v/2f75c6d5428c751268488dccef88d9741af94886/" />
-  <meta name="manubot_html_url_versioned" content="https://SHzzzAyys.github.io/manubot-paper/v/2f75c6d5428c751268488dccef88d9741af94886/" />
-  <meta name="manubot_pdf_url_versioned" content="https://SHzzzAyys.github.io/manubot-paper/v/2f75c6d5428c751268488dccef88d9741af94886/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://SHzzzAyys.github.io/manubot-paper/v/77f7a5921889baeeb9a07c3494b91ae92c76b9af/" />
+  <meta name="manubot_html_url_versioned" content="https://SHzzzAyys.github.io/manubot-paper/v/77f7a5921889baeeb9a07c3494b91ae92c76b9af/" />
+  <meta name="manubot_pdf_url_versioned" content="https://SHzzzAyys.github.io/manubot-paper/v/77f7a5921889baeeb9a07c3494b91ae92c76b9af/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -65,9 +65,9 @@ manubot-clear-requests-cache: false
 
 <small><em>
 This manuscript
-([permalink](https://SHzzzAyys.github.io/manubot-paper/v/2f75c6d5428c751268488dccef88d9741af94886/))
+([permalink](https://SHzzzAyys.github.io/manubot-paper/v/77f7a5921889baeeb9a07c3494b91ae92c76b9af/))
 was automatically generated
-from [SHzzzAyys/manubot-paper@2f75c6d](https://github.com/SHzzzAyys/manubot-paper/tree/2f75c6d5428c751268488dccef88d9741af94886)
+from [SHzzzAyys/manubot-paper@77f7a59](https://github.com/SHzzzAyys/manubot-paper/tree/77f7a5921889baeeb9a07c3494b91ae92c76b9af)
 on May 31, 2026.
 </em></small>
 
