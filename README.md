@@ -40,6 +40,15 @@ This repository does not claim broad adoption, production deployment, or a large
 
 The public repository intentionally excludes private contact information and personal academic planning drafts. It is meant to expose the reproducible manuscript workflow, not private planning material.
 
+## Repository Health and Reuse
+
+- Citation metadata is provided in [`CITATION.cff`](CITATION.cff).
+- Local validation and build checks are documented in [`docs/reproducibility.md`](docs/reproducibility.md).
+- Public branch, tag, and release checks are documented in [`docs/public-release-checklist.md`](docs/public-release-checklist.md).
+- Contribution expectations are documented in [`CONTRIBUTING.md`](CONTRIBUTING.md), with pull-request and issue templates under [`.github/`](.github/).
+- Professional conduct and private-data reporting are covered by [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) and [`SECURITY.md`](SECURITY.md).
+- Open-source benchmarking notes are recorded in [`docs/open-source-benchmark.md`](docs/open-source-benchmark.md).
+
 ## Core Manuscript Files
 
 - `content/00.front-matter.md`

@@ -1,0 +1,37 @@
+name: Privacy or public-data boundary concern
+description: Report a possible private-data exposure without posting the private content publicly.
+title: "[Privacy]: "
+labels:
+  - privacy
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not paste secrets, personal email addresses, private drafts, local paths,
+        or unpublished academic planning material into this public issue. Describe
+        the category of concern and point to the file or branch only when safe.
+  - type: dropdown
+    id: category
+    attributes:
+      label: Concern category
+      options:
+        - Private contact information
+        - Private academic draft or planning material
+        - Secret, token, or credential
+        - Local path or generated log
+        - Unsafe release artifact
+        - Other public-data boundary concern
+    validations:
+      required: true
+  - type: input
+    id: location
+    attributes:
+      label: Public location, if safe to share
+      description: File path, branch, commit, release, or URL. Leave blank if sharing it would expose private content.
+  - type: textarea
+    id: description
+    attributes:
+      label: Safe description
+      description: Describe the issue without copying private or sensitive content.
+    validations:
+      required: true

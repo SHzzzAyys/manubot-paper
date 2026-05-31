@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use or adapt this workflow, please cite it as below."
+title: "Cat Toxoplasma Vaccine Review Workflow"
+version: "0.1.0"
+date-released: "2026-05-31"
+authors:
+  - family-names: "Shang"
+    given-names: "Zheng"
+repository-code: "https://github.com/SHzzzAyys/manubot-paper"
+url: "https://github.com/SHzzzAyys/manubot-paper"
+license: "CC-BY-4.0"
+keywords:
+  - "reproducible research"
+  - "scientific writing"
+  - "veterinary parasitology"
+  - "Toxoplasma"
+  - "Manubot"
+abstract: >-
+  A reproducible research writing workflow for veterinary parasitology /
+  Toxoplasma research, combining Manubot-style manuscript sources, structured
+  evidence tables, validation scripts, and CI-oriented build configuration.
