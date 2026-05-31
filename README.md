@@ -1,5 +1,8 @@
 # Cat Toxoplasma Vaccine Review Workflow
 
+[![Manubot](https://github.com/SHzzzAyys/manubot-paper/actions/workflows/manubot.yaml/badge.svg)](https://github.com/SHzzzAyys/manubot-paper/actions/workflows/manubot.yaml)
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](LICENSE.md)
+
 This repository is a reproducible research writing workflow for veterinary parasitology / Toxoplasma research.
 
 It uses Manubot-style manuscript sources, structured evidence tables, validation scripts, and CI-oriented build configuration to maintain a review project on cat toxoplasmosis vaccine research. The goal is to make the literature review process inspectable: source text, evidence tables, references, generated outputs, and validation logic live together in one version-controlled workflow.
@@ -36,6 +39,15 @@ This repository does not claim broad adoption, production deployment, or a large
 ## Public Data Boundary
 
 The public repository intentionally excludes private contact information and personal academic planning drafts. It is meant to expose the reproducible manuscript workflow, not private planning material.
+
+## Repository Health and Reuse
+
+- Citation metadata is provided in [`CITATION.cff`](CITATION.cff).
+- Local validation and build checks are documented in [`docs/reproducibility.md`](docs/reproducibility.md).
+- Public branch, tag, and release checks are documented in [`docs/public-release-checklist.md`](docs/public-release-checklist.md).
+- Contribution expectations are documented in [`CONTRIBUTING.md`](CONTRIBUTING.md), with pull-request and issue templates under [`.github/`](.github/).
+- Professional conduct and private-data reporting are covered by [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) and [`SECURITY.md`](SECURITY.md).
+- Open-source benchmarking notes are recorded in [`docs/open-source-benchmark.md`](docs/open-source-benchmark.md).
 
 ## Core Manuscript Files
 

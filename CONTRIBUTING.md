@@ -19,6 +19,8 @@
 - Mention any sections that need scientific review.
 - Note whether figures, tables, or references were added.
 - Wait for the Manubot build to pass before merging.
+- Confirm that no private contact information, local paths, thesis/proposal/defense drafts, or private planning material were added.
+- For evidence-table changes, identify whether the source is a direct cat study, support study, review, or research-gap entry.
 
 ## Review Checklist
 
@@ -26,3 +28,11 @@
 - citations resolve correctly
 - headings and section order remain coherent
 - figures and tables are referenced in the text
+- public-data boundary remains intact
+- validation commands in `docs/reproducibility.md` pass or the failure is explained
+
+## Release Preparation
+
+Before tagging a public release, follow `docs/public-release-checklist.md`.
+Release notes should describe real workflow or manuscript changes only, without
+unsupported claims about adoption, user counts, or production use.
