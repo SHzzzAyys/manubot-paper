@@ -1,7 +1,7 @@
 # Output directory containing the formatted manuscript
 
 The [`gh-pages`](https://github.com/SHzzzAyys/manubot-paper/tree/gh-pages) branch hosts the contents of this directory at <https://SHzzzAyys.github.io/manubot-paper/>.
-The permalink for this webpage version is <https://SHzzzAyys.github.io/manubot-paper/v/2f75c6d5428c751268488dccef88d9741af94886/>.
+The permalink for this webpage version is <https://SHzzzAyys.github.io/manubot-paper/v/77f7a5921889baeeb9a07c3494b91ae92c76b9af/>.
 To redirect to the permalink for the latest manuscript version at anytime, use the link <https://SHzzzAyys.github.io/manubot-paper/v/freeze/>.
 
 ## Files
@@ -35,4 +35,4 @@ Verifying timestamps with the `ots verify` command requires running a local bitc
 ## Source
 
 The manuscripts in this directory were built from
-[`2f75c6d5428c751268488dccef88d9741af94886`](https://github.com/SHzzzAyys/manubot-paper/commit/2f75c6d5428c751268488dccef88d9741af94886).
+[`77f7a5921889baeeb9a07c3494b91ae92c76b9af`](https://github.com/SHzzzAyys/manubot-paper/commit/77f7a5921889baeeb9a07c3494b91ae92c76b9af).
