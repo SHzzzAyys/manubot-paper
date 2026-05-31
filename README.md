@@ -1,5 +1,8 @@
 # Cat Toxoplasma Vaccine Review Workflow
 
+[![Manubot](https://github.com/SHzzzAyys/manubot-paper/actions/workflows/manubot.yaml/badge.svg)](https://github.com/SHzzzAyys/manubot-paper/actions/workflows/manubot.yaml)
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](LICENSE.md)
+
 This repository is a reproducible research writing workflow for veterinary parasitology / Toxoplasma research.
 
 It uses Manubot-style manuscript sources, structured evidence tables, validation scripts, and CI-oriented build configuration to maintain a review project on cat toxoplasmosis vaccine research. The goal is to make the literature review process inspectable: source text, evidence tables, references, generated outputs, and validation logic live together in one version-controlled workflow.
