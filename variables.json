@@ -1,0 +1,73 @@
+{
+  "pandoc": {
+    "title": "猫的弓形虫疫苗研究进展",
+    "keywords": [
+      "弓形虫",
+      "猫",
+      "疫苗",
+      "综述",
+      "manubot"
+    ],
+    "lang": "zh-CN",
+    "date-meta": "2026-05-31",
+    "author-meta": [
+      "Zheng Shang"
+    ],
+    "header-includes": "<!--\nManubot generated metadata rendered from header-includes-template.html.\nSuggest improvements at https://github.com/manubot/manubot/blob/main/manubot/process/header-includes-template.html\n-->\n<meta name=\"dc.format\" content=\"text/html\" />\n<meta property=\"og:type\" content=\"article\" />\n<meta name=\"dc.title\" content=\"猫的弓形虫疫苗研究进展\" />\n<meta name=\"citation_title\" content=\"猫的弓形虫疫苗研究进展\" />\n<meta property=\"og:title\" content=\"猫的弓形虫疫苗研究进展\" />\n<meta property=\"twitter:title\" content=\"猫的弓形虫疫苗研究进展\" />\n<meta name=\"dc.date\" content=\"2026-05-31\" />\n<meta name=\"citation_publication_date\" content=\"2026-05-31\" />\n<meta property=\"article:published_time\" content=\"2026-05-31\" />\n<meta name=\"dc.modified\" content=\"2026-05-31T03:54:04+00:00\" />\n<meta property=\"article:modified_time\" content=\"2026-05-31T03:54:04+00:00\" />\n<meta name=\"dc.language\" content=\"zh-CN\" />\n<meta name=\"citation_language\" content=\"zh-CN\" />\n<meta name=\"dc.relation.ispartof\" content=\"Manubot\" />\n<meta name=\"dc.publisher\" content=\"Manubot\" />\n<meta name=\"citation_journal_title\" content=\"Manubot\" />\n<meta name=\"citation_technical_report_institution\" content=\"Manubot\" />\n<meta name=\"citation_author\" content=\"Zheng Shang\" />\n<meta name=\"citation_author_institution\" content=\"Independent Researcher\" />\n<meta name=\"citation_author_orcid\" content=\"None\" />\n<link rel=\"canonical\" href=\"https://SHzzzAyys.github.io/manubot-paper/\" />\n<meta property=\"og:url\" content=\"https://SHzzzAyys.github.io/manubot-paper/\" />\n<meta property=\"twitter:url\" content=\"https://SHzzzAyys.github.io/manubot-paper/\" />\n<meta name=\"citation_fulltext_html_url\" content=\"https://SHzzzAyys.github.io/manubot-paper/\" />\n<meta name=\"citation_pdf_url\" content=\"https://SHzzzAyys.github.io/manubot-paper/manuscript.pdf\" />\n<link rel=\"alternate\" type=\"application/pdf\" href=\"https://SHzzzAyys.github.io/manubot-paper/manuscript.pdf\" />\n<link rel=\"alternate\" type=\"text/html\" href=\"https://SHzzzAyys.github.io/manubot-paper/v/2f75c6d5428c751268488dccef88d9741af94886/\" />\n<meta name=\"manubot_html_url_versioned\" content=\"https://SHzzzAyys.github.io/manubot-paper/v/2f75c6d5428c751268488dccef88d9741af94886/\" />\n<meta name=\"manubot_pdf_url_versioned\" content=\"https://SHzzzAyys.github.io/manubot-paper/v/2f75c6d5428c751268488dccef88d9741af94886/manuscript.pdf\" />\n<meta property=\"og:type\" content=\"article\" />\n<meta property=\"twitter:card\" content=\"summary_large_image\" />\n<link rel=\"icon\" type=\"image/png\" sizes=\"192x192\" href=\"https://manubot.org/favicon-192x192.png\" />\n<link rel=\"mask-icon\" href=\"https://manubot.org/safari-pinned-tab.svg\" color=\"#ad1457\" />\n<meta name=\"theme-color\" content=\"#ad1457\" />\n<!-- end Manubot generated metadata -->\n",
+    "bibliography": [
+      "content/manual-references.json"
+    ],
+    "manubot-output-bibliography": "output/references.json",
+    "manubot-output-citekeys": "output/citations.tsv",
+    "manubot-requests-cache-path": "ci/cache/requests-cache",
+    "manubot-clear-requests-cache": false
+  },
+  "manubot": {
+    "date": "2026-05-31",
+    "date_long": "May 31, 2026",
+    "generated": "2026-05-31T03:54:04+00:00",
+    "generated_date_long": "May 31, 2026",
+    "randomize_author_order": false,
+    "authors": [
+      {
+        "github": "shangzheng666",
+        "name": "Zheng Shang",
+        "initials": "ZS",
+        "orcid": null,
+        "email": null,
+        "affiliations": [
+          "Independent Researcher"
+        ],
+        "corresponding": true,
+        "affiliation_numbers": [
+          1
+        ]
+      }
+    ],
+    "affiliations": [
+      {
+        "affiliation": "Independent Researcher",
+        "affiliation_number": 1
+      }
+    ],
+    "ci_source": {
+      "provider": "github",
+      "repo_slug": "SHzzzAyys/manubot-paper",
+      "repo_owner": "SHzzzAyys",
+      "repo_name": "manubot-paper",
+      "commit": "2f75c6d5428c751268488dccef88d9741af94886",
+      "triggering_commit": "2f75c6d5428c751268488dccef88d9741af94886",
+      "build_url": "https://github.com/SHzzzAyys/manubot-paper/commit/2f75c6d5428c751268488dccef88d9741af94886/checks",
+      "job_url": "https://github.com/SHzzzAyys/manubot-paper/actions/runs/26702586325"
+    },
+    "html_url": "https://SHzzzAyys.github.io/manubot-paper/",
+    "pdf_url": "https://SHzzzAyys.github.io/manubot-paper/manuscript.pdf",
+    "html_url_versioned": "https://SHzzzAyys.github.io/manubot-paper/v/2f75c6d5428c751268488dccef88d9741af94886/",
+    "pdf_url_versioned": "https://SHzzzAyys.github.io/manubot-paper/v/2f75c6d5428c751268488dccef88d9741af94886/manuscript.pdf",
+    "manubot_version": "0.6.1",
+    "rootstock_commit": null,
+    "manuscript_stats": {
+      "word_count": 2676
+    }
+  }
+}
